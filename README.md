@@ -13,11 +13,25 @@ First, install a proprietary NVIDIA driver for your GPU (version 535 in this cas
 sudo apt-get update && sudo apt-get install -y nvidia-driver-535 nvidia-dkms-535
 ```
 
+GPU driver changes usually require a reboot to take effect.
+
+```sh
+sudo reboot
+```
+
 According to the "getting started" [page](https://pytorch.org/get-started/locally/)
 of PyTorch, execute following command to set up PyTorch to use GPUs.
 
 ```sh
 python -m pip install torch torchvision torchaudio
+```
+
+Additionally, install the Keras Core 3.0 package to make use of Keras in PyTorch.
+Unlike TensorFlow, Keras is not automatically shipped with PyTorch. It needs to be
+installed separately.
+
+```sh
+python -m pip install keras-core
 ```
 
 ## Training
@@ -27,7 +41,7 @@ Now, it's time to check if the setup was successful. Open a console to monitor t
 watch nvidia-smi
 ```
 
-Launch another console to run the training and see if it utilizes the GPU.
+Launch another console to run the training script and see if it utilizes the GPU as expected.
 
 ```sh
 python keras.py
@@ -82,4 +96,4 @@ Sat Feb 24 21:08:26 2024
 +---------------------------------------------------------------------------------------+
 ```
 
-In this case NVIDIA schedules a compute task for our python training with 39% GPU utilization.
+In this case NVIDIA schedules a compute task (Type C) for our python training with 39% GPU utilization.
